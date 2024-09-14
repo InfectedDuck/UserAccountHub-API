@@ -26,16 +26,16 @@ The UserAccountHub API is a robust web application designed to manage user accou
 
 ## Tech Stack
 
-- **Backend**: Flask, SQLAlchemy
+- **Backend**: Django, DjangoORM
 - **Database**: PostgreSQL
 - **Containerization**: Docker
 - **Testing**: unittest, factory_boy
-- **API Documentation**: Flask-RESTful
 - **CI/CD**: Tekton
 
 ### Links
 
-- [Flask](https://flask.palletsprojects.com/)
+- [Django](https://www.djangoproject.com/)
+- [Django ORM](https://docs.djangoproject.com/en/stable/topics/db/)
 - [SQLAlchemy](https://www.sqlalchemy.org/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Docker](https://www.docker.com/)
@@ -67,10 +67,10 @@ To get started with the UserAccountHub API, follow these steps:
     ```
 
 
-5. Start the Flask Application
+5. Start the Application
 
     ```bash
-    python app.py
+    python manage.py runserver
     ```
 
 ## API Endpoints
