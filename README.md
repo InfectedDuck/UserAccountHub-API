@@ -1,135 +1,171 @@
-# DevOps Capstone Template
+# UserAccountHub API
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Python 3.9](https://img.shields.io/badge/Python-3.9-green.svg)](https://shields.io/)
-[![Build Status](https://github.com/InfectedDuck/devops-capstone-project/actions/workflows/ci-build.yaml/badge.svg)]
+## Overview
 
+The UserAccountHub API is a robust web application designed to manage user accounts. Built using the Flask framework, this API allows for efficient CRUD operations, advanced querying, and reliable data management. It integrates seamlessly with PostgreSQL for data storage and employs Docker for containerization, ensuring a smooth and scalable deployment process. The application is equipped with a comprehensive suite of tests to validate functionality and ensure reliability.
 
-This repository contains the starter code for the project in [**IBM-CD0285EN-SkillsNetwork DevOps Capstone Project**](https://www.coursera.org/learn/devops-capstone-project?specialization=devops-and-software-engineering) which is part of the [**IBM DevOps and Software Engineering Professional Certificate**](https://www.coursera.org/professional-certificates/devops-and-software-engineering)
+## Table of Contents
 
-## Usage
+* [Features](#features)
+* [Tech Stack](#tech-stack)
+* [Installation](#installation)
+* [API Endpoints](#api-endpoints)
+* [Tests](#tests)
+* [Deployment](#deployment)
+* [Kubernetes Deployment](#kubernetes-deployment)
+* [License](#license)
 
-You should use this template to start your DevOps Capstone project. It contains all of the code that you will need to get started.
+## Features
 
-Do Not fork this code! It is meant to be used by pressing the  <span style=color:white;background:green>**Use this Template**</span> button in GitHub. This will copy the code to your own repository with no connection back to the original repository like a fork would. This is what you want.
+- **CRUD Operations**: Create, Read, Update, and Delete user accounts.
+- **Advanced Querying**: Filter accounts by name and other attributes.
+- **Data Validation**: Ensures accurate and consistent data input.
+- **Scalability**: Designed to handle a growing number of accounts and users.
+- **Containerization**: Dockerized for consistent development and production environments.
+- **Testing**: Includes unit and integration tests to ensure high quality and reliability.
 
-## Development Environment
+## Tech Stack
 
-These labs are designed to be executed in the IBM Developer Skills Network Cloud IDE with OpenShift. Please use the links provided in the Coursera Capstone project to access the lab environment.
+- **Backend**: Flask, SQLAlchemy
+- **Database**: PostgreSQL
+- **Containerization**: Docker
+- **Testing**: unittest, factory_boy
+- **API Documentation**: Flask-RESTful
+- **CI/CD**: Tekton
 
-Once you are in the lab environment, you can initialize it with `bin/setup.sh` by sourcing it. (*Note: DO NOT run this program as a bash script. It sets environment variable and so must be sourced*):
+### Links
 
-```bash
-source bin/setup.sh
-```
+- [Flask](https://flask.palletsprojects.com/)
+- [SQLAlchemy](https://www.sqlalchemy.org/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Docker](https://www.docker.com/)
+- [Tekton](https://tekton.dev/)
+- [unittest](https://docs.python.org/3/library/unittest.html)
+- [factory_boy](https://factoryboy.readthedocs.io/)
 
-This will install Python 3.9, make it the default, modify the bash prompt, create a Python virtual environment and activate it.
+## Installation
 
-After sourcing it you prompt should look like this:
+To get started with the UserAccountHub API, follow these steps:
 
-```bash
-(venv) theia:project$
-```
+1. Clone the Repository
 
-## Useful commands
-
-Under normal circumstances you should not have to run these commands. They are performed automatically at setup but may be useful when things go wrong:
-
-### Activate the Python 3.9 virtual environment
-
-You can activate the Python 3.9 environment with:
-
-```bash
-source ~/venv/bin/activate
-```
-
-### Installing Python dependencies
-
-These dependencies are installed as part of the setup process but should you need to install them again, first make sure that the Python 3.9 virtual environment is activated and then use the `make install` command:
-
-```bash
-make install
-```
-
-### Starting the Postgres Docker container
-
-The labs use Postgres running in a Docker container. If for some reason the service is not available you can start it with:
-
-```bash
-make db
-```
-
-You can use the `docker ps` command to make sure that postgres is up and running.
-
-## Project layout
-
-The code for the microservice is contained in the `service` package. All of the test are in the `tests` folder. The code follows the **Model-View-Controller** pattern with all of the database code and business logic in the model (`models.py`), and all of the RESTful routing on the controller (`routes.py`).
-
-```text
-├── service         <- microservice package
-│   ├── common/     <- common log and error handlers
-│   ├── config.py   <- Flask configuration object
-│   ├── models.py   <- code for the persistent model
-│   └── routes.py   <- code for the REST API routes
-├── setup.cfg       <- tools setup config
-└── tests                       <- folder for all of the tests
-    ├── factories.py            <- test factories
-    ├── test_cli_commands.py    <- CLI tests
-    ├── test_models.py          <- model unit tests
-    └── test_routes.py          <- route unit tests
-```
-
-## Data Model
-
-The Account model contains the following fields:
-
-| Name | Type | Optional |
-|------|------|----------|
-| id | Integer| False |
-| name | String(64) | False |
-| email | String(64) | False |
-| address | String(256) | False |
-| phone_number | String(32) | True |
-| date_joined | Date | False |
-
-## Your Task
-
-Complete this microservice by implementing REST API's for `READ`, `UPDATE`, `DELETE`, and `LIST` while maintaining **95%** code coverage. In true **Test Driven Development** fashion, first write tests for the code you "wish you had", and then write the code to make them pass.
-
-## Local Kubernetes Development
-
-This repo can also be used for local Kubernetes development. It is not advised that you run these commands in the Cloud IDE environment. The purpose of these commands are to simulate the Cloud IDE environment locally on your computer. 
-
-At a minimum, you will need [Docker Desktop](https://www.docker.com/products/docker-desktop) installed on your computer. For the full development environment, you will also need [Visual Studio Code](https://code.visualstudio.com) with the [Remote Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension from the Visual Studio Marketplace. All of these can be installed manually by clicking on the links above or you can use a package manager like **Homebrew** on Mac of **Chocolatey** on Windows.
-
-Please only use these commands for working stand-alone on your own computer with the VSCode Remote Container environment provided.
-
-1. Bring up a local K3D Kubernetes cluster
+   ```bash
+   git clone https://github.com/InfectedDuck/UserAccountHub-API.git
+   ```
+2. Set up a virtual environment and install dependencies:
 
     ```bash
-    $ make cluster
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
     ```
 
-2. Install Tekton
+3. Install Dependencies
 
     ```bash
-    $ make tekton
+    docker-compose up --build
     ```
 
-3. Install the ClusterTasks that the Cloud IDE has
+
+5. Start the Flask Application
 
     ```bash
-    $ make clustertasks
+    python app.py
     ```
 
-You can now perform Tekton development locally, just like in the Cloud IDE lab environment.
+## API Endpoints
 
-## Author
+### GET /accounts
 
-[John Rofrano](https://www.coursera.org/instructor/johnrofrano), Senior Technical Staff Member, DevOps Champion, @ IBM Research, and Instructor @ Coursera
+- **Description**: Retrieve a list of all accounts.
+- **Response**: A list of accounts with their details.
+
+### POST /accounts
+
+- **Description**: Create a new account.
+- **Request Body**: The details of the account to be created.
+- **Response**: The details of the newly created account.
+
+### GET /accounts/{id}
+
+- **Description**: Retrieve an account by ID.
+- **URL Parameters**: 
+  - `id`: The ID of the account to retrieve.
+- **Response**: Details of the account with the specified ID.
+
+### PUT /accounts/{id}
+
+- **Description**: Update an account by ID.
+- **URL Parameters**: 
+  - `id`: The ID of the account to update.
+- **Request Body**: The updated details of the account.
+- **Response**: The updated details of the account.
+
+### DELETE /accounts/{id}
+
+- **Description**: Delete an account by ID.
+- **URL Parameters**: 
+  - `id`: The ID of the account to delete.
+- **Response**: Confirmation of deletion.
+
+### GET /accounts/search?name={name}
+
+- **Description**: Search for accounts by name.
+- **Query Parameters**: 
+  - `name`: The name of the account to search for.
+- **Response**: A list of accounts matching the search criteria.
+ 
+
+## Tests
+
+### To ensure the application works as expected, run the tests:
+    ```
+    docker-compose exec web python -m unittest discover -s tests
+    ```
+
+## Deployment
+
+Deploying the UserAccountHub API involves several steps:
+
+### Containerization
+
+The application is containerized using Docker. This process packages the application and its dependencies into a single container, simplifying deployment.
+
+### Deployment Process
+
+Follow the steps below to deploy the application:
+1. **Build the Docker Image**: Create a Docker image of the application using the provided `Dockerfile`.
+   ```bash
+   docker build -t account-management-api .
+   ```
+3. **Run the Docker Container**: Start a container from the built Docker image to run the application.
+   ```bash
+   docker run -d -p 8080:8080 account-management-api
+   ```
+The application will be accessible at http://localhost:8080.
+
+## Kubernetes Deployment
+
+Deploying the Account Management API on Kubernetes involves creating and applying Kubernetes manifests for deployment and service management. Kubernetes provides a robust platform for managing containerized applications at scale.
+
+### Create Deployment
+
+Define a Kubernetes Deployment to manage the application's lifecycle, including scaling and rolling updates. 
+
+### Create Service
+
+Define a Kubernetes Service to expose the application and enable communication with other services.
+
+### Apply Manifests
+
+Apply the Kubernetes manifests to your cluster using the following command:
+
+```bash
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+```
+This will deploy the application and expose it based on the configuration specified in the manifests.
 
 ## License
-
-Licensed under the Apache License. See [LICENSE](LICENSE)
-
-## <h3 align="center"> © IBM Corporation 2022. All rights reserved. <h3/>
+This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details. <br>
+This project is made as a part of IBM Course.
